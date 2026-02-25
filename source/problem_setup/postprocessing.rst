@@ -29,7 +29,7 @@ function of the ``.udf`` file.
       if (nrs->timeStepConverged)
 
       // Only on timesteps when checkpoints are written
-      if (nrs->checkPointStep)
+      if (nrs->checkpointStep)
 
       // Only on the final timestep
       if (nrs->lastStep)
@@ -657,7 +657,7 @@ as arguments.
       }
 
       // Output at checkpoint steps
-      if(nrs->checkPointStep) {
+      if(nrs->checkpointStep) {
         avg->writeToFile(mesh);
       }
    }
@@ -665,7 +665,7 @@ as arguments.
 The time averaging is advanced in ``UDF_ExecuteStep()`` via ``avg->run(time)``,
 typically guarded by ``nrs->timeStepConverged``  (e.g., for outer steps in
 neknek). To write the averaged fields to a file, ``avg->writeToFile(mesh)``
-is called when ``nrs->checkPointStep`` is true. Each registered entry is written
+is called when ``nrs->checkpointStep`` is true. Each registered entry is written
 as a scalar field to files ``tavg0.fXXXXX``. This call also resets the
 averaging window.
 
@@ -739,7 +739,7 @@ table for the mapping between variables and output files.
         avg->run(time);
       }
 
-      if (nrs->checkPointStep) {
+      if (nrs->checkpointStep) {
         avg->writeToFile(mesh);
         avg->reset(); // reset time window
       }
